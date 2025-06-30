@@ -1,31 +1,36 @@
-input [type="radio"] {
+input[type="radio"] {
     display: none;
 }
 
 label {
-    display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    background-color: blue;
+    color: aliceblue;
+    padding: 12px;
+    text-align: center;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 16px;
 }
 
-.desplegable {
+.formulario {
     display: none;
-    margin-top: 10px;
-    padding: 10px;
+    max-width: 300px;
+    margin: 0 auto 20px auto;
+    padding: 15px;
     border: 1px solid #ccc;
-    background-color: #f0f0f0;
+    background-color: antiquewhite;
     border-radius: 5px;
 }
 
-#admin:checked
-.contenido .admin-box {
+#admin:checked ~ .administrador-form {
     display: block;
 }
 
-#residente:checked
-.contenido .residente-box {
+#residente:checked ~ .residente-form {
     display: block;
 }
+
