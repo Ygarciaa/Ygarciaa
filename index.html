@@ -8,10 +8,15 @@
 </head>
 <body>
     <h1>Iniciar Sesión</h1>
-    <div class="administradores">
-        <input type="checkbox" id="palanca">
-        <label for="palanca">Administradores</label>
-        <div class="desplegable">
+    <div class="inicioDesplegable">
+        <input type="radio" name="panel" id="administrador">
+        <input type="radio" name="panel" id="residente">
+
+        <label for="administrador">Administradores</label>
+        <label for="residente">Residentes</label>
+
+        <div class="contenido">
+            <div class="desplegable administrador-box">
             <form>
                 Usuario: <input type="text" required> <br>
                 Contraseña: <input type="password" required> <br>
@@ -20,24 +25,25 @@
                 </a>
                 <a href="olvidar contraseña">Se me olvido la contraseña</a>
             </form>
+            </div>
         </div>
-    </div>
-    <div class="residentes">
-        <input type="checkbox" id="palanca">
-        <label for="palanca">Residentes</label>
-        <div class="desplegable">
+
+        <div class="contenido">
+            <div class="desplegable residente-box">
             <form>
                 Usuario: <input type="text" required> <br>
                 Contraseña: <input type="password" required> <br>
-                <!--
-                <h2>Iniciar sesión por correo Electrónico, Google o Facebook:</h2>
-                -->
-                <a href="Frontend.html">
+                <a href="Backoffice.html">
                     <button type="button">Iniciar</button>
                 </a>
                 <a href="olvidar contraseña">Se me olvido la contraseña</a>
+                <!--
+                <h2>Iniciar sesión por correo Electrónico, Google o Facebook:</h2>
+                -->
             </form>
+            </div>
         </div>
     </div>
+    
 </body>
 </html>
