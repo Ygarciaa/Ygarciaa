@@ -1,0 +1,49 @@
+Primero descargar docker, tailscale, y listo.
+Ir a cmd, crear una nueva carpeta (mkdir).
+Adentro de esa carpeta crear 3 archivos (echo. > Dockerfile.apps)
+(echo. > start.sh) (echo. > docker-compose.yml).
+Después editarlos en block de notas (notepad nombreArchivo)
+(adentro de dockerfiles.apps)
+//Acá vamos a especificar la imagen base que es rocky linux. 
+Después ponemos RUN, que básicamente es como decirle que mientras
+se crea la imagen que corra esto, y esto es:
+- dnf -y update: dnf es el gestor de paquetes en Rocky Linux,
+update actualiza todos los paquetes del sistema y -y es para que
+no se detenga.
+Así se mantiene actualizado y sin vulnerabilidades.
+
+El install basicamente que instale git para clonar los repos, php
+obvio además de sus dependencias para que funcione laravel., y lo otro es para limpiar el cache de dnf
+
+FROM rockylinux:9
+
+RUN dnf -y update && \
+    dnf -y install git php php-pdo 
+php-mbstring php-xml php-bcmath php-json php-curl 
+php-zip php-common php-cli git unzip curl&& \
+    dnf clean all
+
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
+
+# Crear carpeta donde se clonarán las apps
+WORKDIR /srv/apps
+
+# Clonar tu proyecto Laravel desde GitHub (acá podés clonar varias apps Laravel si querés)
+RUN git clone https://github.com/usuario/mi-laravel.git
+
+# Clonar tus 4 aplicaciones desde GitHub (reemplazá con tus repos reales)
+RUN git clone https://github.com/usuario/app1.git && \
+    git clone https://github.com/usuario/app2.git && \
+    git clone https://github.com/usuario/api1.git && \
+    git clone https://github.com/usuario/api2.git
+
+# Copiar el script de inicio (lo creamos en el paso siguiente)
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Exponer puertos para cada app
+EXPOSE 8001 8002 8003 8004
+
+# Iniciar el script cuando arranque el contenedor
+CMD ["/start.sh"]
